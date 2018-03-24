@@ -41,6 +41,12 @@ public class User
 	joinColumns= @JoinColumn(name="user_id"),
 	inverseJoinColumns=@JoinColumn(name="skill_id"))
 	private Set<Skill> skills;
+	
+	@ManyToMany(cascade= {CascadeType.MERGE, CascadeType.PERSIST})
+	@JoinTable(name="user_role",
+	joinColumns= @JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="role_id"))
+	private Set<Role> roles;
 
 	public int getId() {
 		return id;
@@ -154,14 +160,6 @@ public class User
 		this.interests = interests;
 	}
 
-	public Boolean isLookingForJobs() {
-		return lookingForJobs;
-	}
-
-	public void setLookingForJobs(Boolean lookingForJobs) {
-		this.lookingForJobs = lookingForJobs;
-	}
-
 	public Set<Skill> getSkills() {
 		return skills;
 	}
@@ -169,6 +167,23 @@ public class User
 	public void setSkills(Set<Skill> skills) {
 		this.skills = skills;
 	}
+
+	public Boolean getLookingForJobs() {
+		return lookingForJobs;
+	}
+
+	public void setLookingForJobs(Boolean lookingForJobs) {
+		this.lookingForJobs = lookingForJobs;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
 	
 	
 }
