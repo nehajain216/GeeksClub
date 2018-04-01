@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>New Link</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<form class="form-horizontal" th:action="@{/links}"
+			th:object="${link}" method="post">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" th:field="*{title}"
+						placeholder="Title">
+					<p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+						th:class="text-red">Incorrect data</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">URL</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" th:field="*{url}"
+						placeholder="URL">
+					<p th:if="${#fields.hasErrors('url')}" th:errors="*{url}"
+						th:class="text-red">Incorrect data</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Category</label>
+				<div class="col-sm-10">
+					<select class="form-control" th:field="*{category.id}">
+						<option th:value="0">-- select --</option>
+						<option th:each="category  : ${categories}"
+							th:value="${category.id}" th:text="${category.name}"></option>
+					</select>
+					<p th:if="${#fields.hasErrors('category.id')}" th:errors="*{category.id}"
+						th:class="text-red">Incorrect data</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Submit</button>
+				</div>
+			</div>
+		</form>
+	</section>
+
+</body>
+</html>
