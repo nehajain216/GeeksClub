@@ -28,6 +28,7 @@ th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.css}" />
 					<li><a href="/">Home</a></li>
 					<li><a href="/admin/users">Users</a></li>
 					<li><a href="#contact">Contact</a></li>
+					<li sec:authorize="isAuthenticated()"><a href="/links/new">Add Link</a></li>
 					<li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
 					<li sec:authorize="isAuthenticated()"><a href="/logout">Logout</a></li>
 				</ul>
