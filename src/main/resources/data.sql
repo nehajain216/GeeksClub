@@ -59,11 +59,11 @@ insert into categories(id,name) values
 insert into links(id,title,url,category_id,created_on,created_by) values
 (1,'Introduction to Java Bytecode','https://dzone.com/articles/introduction-to-java-bytecode',1,'2017-10-26',1),
 (2,'Tips to Be a Cross-Platform Game Developer','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer',2,'2017-09-26',1),
-(3,'3 Reasons Why Unplanned Meetings Do More Harm Than Good','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer',2,'2017-11-26',1),
-(4,'The Importance of Graph Visualization Tools: Exploring the Paradise Papers','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer',4,'2018-03-26',1),
-(5,'5 Ways Data Analytics Is Disrupting Business Models','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer',4,'2018-02-26',2),
-(6,'Top 11 Continuous Delivery Tools for Kubernetes','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer',3,'2017-11-26',2),
-(7,'A Serverless Message Queue Without the Glue','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer',3,'2017-11-26',2)
+(3,'3 Reasons Why Unplanned Meetings Do More Harm Than Good','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer1',2,'2017-11-26',1),
+(4,'The Importance of Graph Visualization Tools: Exploring the Paradise Papers','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer2',4,'2018-03-26',1),
+(5,'5 Ways Data Analytics Is Disrupting Business Models','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer3',4,'2018-02-26',2),
+(6,'Top 11 Continuous Delivery Tools for Kubernetes','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer4',3,'2017-11-26',2),
+(7,'A Serverless Message Queue Without the Glue','https://dzone.com/articles/tips-to-be-a-cross-platform-game-developer5',3,'2017-11-26',2)
 ;
 
 

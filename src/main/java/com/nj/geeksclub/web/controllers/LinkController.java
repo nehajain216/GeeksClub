@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.nj.geeksclub.entities.Category;
 import com.nj.geeksclub.entities.Link;
+import com.nj.geeksclub.exceptions.CustomException;
 import com.nj.geeksclub.repositories.UserRepository;
 import com.nj.geeksclub.services.CategoryService;
 import com.nj.geeksclub.services.LinkService;
-
 
 @Controller
 public class LinkController {
@@ -31,49 +31,49 @@ public class LinkController {
 	private UserRepository userRepository;
 
 	@Autowired
-	public LinkController(LinkService linkService,CategoryService categoryService,UserRepository userRepository) {
+	public LinkController(LinkService linkService, CategoryService categoryService, UserRepository userRepository) {
 		this.linkService = linkService;
 		this.categoryService = categoryService;
 		this.userRepository = userRepository;
 	}
-	
+
 	@GetMapping("/links/new")
-	public String newLinkForm(Model model)
-	{
+	public String newLinkForm(Model model) {
 		model.addAttribute("link", new Link());
 		return "newlink";
 	}
-	
+
 	@ModelAttribute("categories")
-	public List<Category> getCategories()
-	{
+	public List<Category> getCategories() {
 		List<Category> allCategory = categoryService.getAllCategory();
 		return allCategory;
 	}
-	
+
 	@PostMapping("/links")
-	public String createLink(@Valid Link link, BindingResult result)
-	{
-		if(link.getCategory().getId() == 0)
-		{
+	public String createLink(@Valid Link link, BindingResult result) {
+		if (link.getCategory().getId() == 0) {
 			result.rejectValue("category.id", "validator_blank_category");
 		}
-		if(result.hasErrors())
-		{
+		if (result.hasErrors()) {
 			return "newlink";
 		}
-		
+
 		Optional<com.nj.geeksclub.entities.User> userOptional = userRepository.findByEmail(getUserName());
 		com.nj.geeksclub.entities.User user = userOptional.get();
 		link.setCreatedBy(user);
 		link.setCreatedOn(LocalDate.now());
-		linkService.saveLink(link);
+		try {
+			linkService.saveLink(link);
+		} catch (CustomException cx) {
+			result.rejectValue("url", "duplicate_url", cx.getMessage());
+			return "newlink";
+		}
+
 		return "redirect:/";
-		
+
 	}
-	
-	public String getUserName()
-	{
+
+	public String getUserName() {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return user.getUsername();
 	}

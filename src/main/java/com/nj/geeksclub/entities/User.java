@@ -47,6 +47,18 @@ public class User
 	joinColumns= @JoinColumn(name="user_id"),
 	inverseJoinColumns=@JoinColumn(name="role_id"))
 	private Set<Role> roles;
+	
+	public User()
+	{
+		
+	}
+
+	public User(int id, String name, String email) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+	}
 
 	public int getId() {
 		return id;

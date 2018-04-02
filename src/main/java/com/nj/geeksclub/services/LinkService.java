@@ -1,9 +1,12 @@
 package com.nj.geeksclub.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.nj.geeksclub.entities.Link;
+import com.nj.geeksclub.exceptions.CustomException;
 import com.nj.geeksclub.repositories.LinkRepository;
 
 @Service
@@ -20,8 +23,14 @@ public class LinkService {
 		return linkRepository.findAll();
 	}
 	
-	public void saveLink(Link link)
+	public Link saveLink(Link link)
 	{
-		linkRepository.save(link);
+		Optional<Link> findByurl = linkRepository.findByUrl(link.getUrl());
+		if(findByurl.isPresent()) 
+		{
+			throw new CustomException("URL already exists");
+		}
+		Link saveLink = linkRepository.save(link);
+		return saveLink;
 	}
 }

@@ -21,14 +21,14 @@ public class Link {
 	@SequenceGenerator(name = "link_generator", sequenceName = "link_sequence", initialValue = 10)
 	@GeneratedValue(generator = "link_generator")
 	private int id;
-	
-	@NotBlank(message="{validator_blank_title}")
+
+	@NotBlank(message = "{validator_blank_title}")
 	private String title;
-	
-	@NotBlank(message="{validator_blank_url}")
+
+	@NotBlank(message = "{validator_blank_url}")
 	private String url;
 
-	@NotNull(message="{validator_blank_category}")
+	@NotNull(message = "{validator_blank_category}")
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
@@ -38,6 +38,18 @@ public class Link {
 	@ManyToOne
 	@JoinColumn(name = "created_by")
 	private User createdBy;
+
+	public Link() {
+
+	}
+
+	public Link(int id, @NotBlank(message = "{validator_blank_title}") String title,
+			@NotBlank(message = "{validator_blank_url}") String url) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.url = url;
+	}
 
 	public int getId() {
 		return id;
