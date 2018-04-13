@@ -39,7 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		Optional<User> userOptional = userRepository.findByEmail(userEmail);
 		if(!userOptional.isPresent())
 		{
-			throw new UsernameNotFoundException("Email "+userEmail+"not found");
+			throw new UsernameNotFoundException("Email "+userEmail+" not found");
 		}
 		User user = userOptional.get();
 		

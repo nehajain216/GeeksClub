@@ -31,8 +31,8 @@ public class UserServiceIT {
 	public void should__get_list_of_all_the_users()
 	{
 		BDDMockito.given(userRepository.findAll()).willReturn(Arrays.asList(
-				new User(1, "neha", "neha@admin.com")
-				,new User(2, "siva", "siva@admin.com")));
+				new User(1, "neha", "neha@admin.com","abcd")
+				,new User(2, "siva", "siva@admin.com","abcd")));
 		
 		List<User> allUsers = userService.getAllUsers();
 		assertThat(allUsers.size()).isEqualTo(2);

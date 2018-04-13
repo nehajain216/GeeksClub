@@ -21,6 +21,16 @@ public class Role {
 	@Column(nullable=false, unique=true)
 	private String name;
 	
+	public Role() {
+		
+	}
+	
+	public Role(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
 	@ManyToMany(mappedBy="roles")
 	private Set<User> users;
 

@@ -3,6 +3,8 @@ package com.nj.geeksclub.web.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,21 +14,23 @@ import com.nj.geeksclub.entities.Category;
 import com.nj.geeksclub.entities.Link;
 import com.nj.geeksclub.models.CategoryDTO;
 import com.nj.geeksclub.services.AnnouncementService;
-import com.nj.geeksclub.services.CategoryService;
 import com.nj.geeksclub.services.JobService;
+import com.nj.geeksclub.services.LinkService;
 
 @Controller
 public class HomeController {
 	
 	private AnnouncementService announcementService;
 	private JobService jobService;
-	private CategoryService categoryService;
+	private LinkService linkService;
+	
+	private static Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
-	public HomeController(AnnouncementService announcementService,JobService jobService,CategoryService categoryService) {
+	public HomeController(AnnouncementService announcementService,JobService jobService,LinkService linkService) {
 		this.announcementService = announcementService;
 		this.jobService = jobService;
-		this.categoryService = categoryService;
+		this.linkService = linkService;
 	}
 	
 	@GetMapping("/")
@@ -34,10 +38,10 @@ public class HomeController {
 	{
 		model.addAttribute("announcements",announcementService.getAllAnnouncements());
 		model.addAttribute("jobs", jobService.getAllJobs());
-		List<Category> allCategory = categoryService.getAllCategory();
+		List<Category> allCategory = linkService.getAllCategory();
 		List<CategoryDTO> categoryDTOs = new ArrayList<>();
 		for (Category category : allCategory) {
-			List<Link> links = categoryService.getLinksByCategory(category.getId());
+			List<Link> links = linkService.getLinksByCategory(category.getId());
 			CategoryDTO categoryDTO = new CategoryDTO();
 			categoryDTO.setId(category.getId());
 			categoryDTO.setName(category.getName());
